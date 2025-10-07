@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Complete Image Processing Pipeline - Low-pass + High-pass + Combination</title>
+    <script type="text/javascript" src="dist/GlslCanvas.js"></script>
+    <style>
+        body {
+            background: #101515;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        #glslCanvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid #333;
+        }
+        
+        .info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 300px;
+        }
+        
+        .controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <h3>Image Processing Pipeline - Final Result</h3>
+        <p><strong>Full Screen Display:</strong></p>
+        <p>Combined low-pass and high-pass filtered images with real-time fine-tuning and dynamic blend modes.</p>
+        <p>Complete pipeline processing both input images simultaneously.</p>
+    </div>
+    
+    <div class="controls">
+        <h4>Interactive Controls</h4>
+        <p><strong>Mouse X:</strong> Low-pass blur intensity</p>
+        <p><strong>Mouse Y:</strong> High-pass edge intensity</p>
+        <p><strong>Combined (X+Y):</strong> Blend modes</p>
+        <p><strong>Time:</strong> Dynamic modulation</p>
+        <p><strong>Frame buffer:</strong> Temporal accumulation</p>
+        <p>Red dot shows mouse position</p>
+    </div>
+    
+    <canvas id="glslCanvas" 
+            data-fragment-url="imageProcessingPipeline.frag" 
+            width="800" 
+            height="600" 
+            data-textures="data/close.jpg, data/open.jpg"></canvas>
+</body>
+<script>
+    var canvas = document.getElementById("glslCanvas");
+    var sandbox = new GlslCanvas(canvas);
+    
+    // Make canvas responsive
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    
+    // Add some logging for debugging
+    console.log("Image Processing Pipeline initialized");
+    console.log("Textures: data/in.png, data/out.png");
+</script>
+</html>
